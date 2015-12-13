@@ -1,0 +1,33 @@
+<div>
+
+<div container>
+    <div class="col-md-1 col-xs-1 visible-lg-block" style="margin-top: 8% ;">
+        <i id="lavo" class="fa fa-chevron-circle-left fa-5x prev "></i>
+    </div>
+    <div class="col-md-10 col-xs-12 col-sm-12 text-center">
+        <div id="owl-demo">
+            <div ng-repeat="product in products" class="item img-box">
+                <div class="hover-mask2"></div><img style="border-radius: 5px;" ng-src="{{product.url}}" alt="Owl Image"> <a href="#"><span class="product-icon fa fa-eye fa-5x"></span></a>
+                <div class="product-info col-md-12">
+                    <p class="project-price">${{product.price}}</p>
+                    <div>
+                        <h4 class="project-title text-left">{{product.name}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 col-xs-1 visible-lg-block" style="margin-top: 8%;">
+        <i id="lavo" class="fa fa-chevron-circle-right fa-5x next"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-xs-6 text-right visible-xs-block visible-sm-block">
+        <i id="lavo" class="fa fa-chevron-circle-left fa-5x prev"></i>
+    </div>
+    <div class="col-md-1  col-xs-1 text-right visible-xs-block visible-sm-block">
+        <i id="lavo" class="fa fa-chevron-circle-right fa-5x next "></i>
+    </div>
+    <div class="col-md-5 col-xs-5"></div>
+</div>
+</div>
