@@ -13,11 +13,15 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
         };
         // var content = "<div class=\"item dodgerBlue\"><h1>"+i+"</h1></div>";
         for (var i = 0; i < data.length; i++) {
-            content = '<div class="item img-box"><div class="hover-mask2">' + '</div><img id="my_picture" style="border-radius: 5px;" src="' + data[i].ownImgurl[0].url + '" alt="Owl Image">' + ' <a href="#"><span class="product-icon fa fa-eye fa-5x"></span></a>' + '<div class="product-info col-md-12"><p class="project-price">$' + data[i].price + '</p>' + '<div><h4 class="project-title text-left">' + data[i].product_name + '</h4></div></div></div>';
+            content = '<div class="item img-box"><div class="hover-mask2">' + '</div><img id="my_picture" style="border-radius: 5px;" src="' + data[i].ownImgurl[0].url + '" alt="Owl Image">' + '<span class="product-icon fa fa-eye fa-5x"></span>' + '<div class="product-info col-md-12"><p class="project-price">$' + data[i].price + '</p>' + '<div><h4 class="project-title text-left">' + data[i].product_name + '</h4></div></div></div>';
             owl.addItem(content);
         };
         console.log($scope.products)
+        $(".hover-mask2").on("click", function(event){ 
+            var elem = $(this).parent(),
+            title = elem.find('.project-title').text()
 
+            console.log(title) })
     });
 
 }]);

@@ -66,6 +66,9 @@ $(document).ready(function() {
     });
     /* testimonial ======================================= */
     $('.carousel').carousel();
+    /* Project Preview  ==============================================*/
+  
+
 });
 
 function co() {

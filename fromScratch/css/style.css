@@ -581,7 +581,7 @@ footer {
     color: inherit;
 }
 
-.img-box:hover a {
+.img-box:hover span {
     opacity: 1;
     /* added */
     top: 0;
@@ -592,13 +592,13 @@ footer {
 
 /* added */
 
-.img-box:hover a span {
+.img-box:hover  span {
     top: 50%;
     position: absolute;
     color: #fff;
     left: 0;
     right: 0;
-    transform: translateY(-50%);
+
 }
 
 

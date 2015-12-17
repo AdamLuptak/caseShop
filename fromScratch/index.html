@@ -42,19 +42,18 @@
                     <img id="navlogo" src="img/icon.png" alt="microstore" width="200" height="50">
                 </a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div id="navBar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right text-center">
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#testimonial">Testimonials</a></li>
-                    <li><a href="#orderform">Order</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#products" data-toggle="collapse" data-target=".navbar-collapse">Products</a></li>
+                    <li><a href="#about" data-toggle="collapse" data-target=".navbar-collapse">About</a></li>
+                    <li><a href="#testimonial" data-toggle="collapse" data-target=".navbar-collapse">Testimonials</a></li>
+                    <li><a href="#orderform" data-toggle="collapse" data-target=".navbar-collapse">Order</a></li>
+                    <li><a href="#contact" data-toggle="collapse" data-target=".navbar-collapse">Contact</a></li>
                     <li class="dropdown">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">UK</button>
                         <ul class="dropdown-menu">
                             <li><a href="#">UK</a></li>
                             <li><a href="#">SK</a></li>
-                          
                         </ul>
                     </li>
                 </ul>
@@ -91,7 +90,6 @@
     <!-- start of product catalogue -->
     <section id="products" ng-controller="ProductCatalogController">
         <div container>
-
             <div class="col-md-1 col-xs-1 visible-lg-block" style="margin-top: 8% ;">
                 <i id="lavo" class="fa fa-chevron-circle-left fa-5x prev "></i>
             </div>
@@ -480,7 +478,7 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/service/allProductsService.js"></script>
     <script type="text/javascript" src="scripts/controller/productCatalogController.js"></script>
-<script type="text/javascript" src="scripts/directive/owlDirective/owlDirective.js"></script>
+    <script type="text/javascript" src="scripts/directive/owlDirective/owlDirective.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
 </body>
 
