@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     });
 
-    
+
 
     /* slideshowSwitch ======================================= */
     $(".next").click(function() {
@@ -67,7 +67,7 @@ $(document).ready(function() {
     /* testimonial ======================================= */
     $('.carousel').carousel();
     /* Project Preview  ==============================================*/
-  
+    $('#buttonOrder').append('<a id="btn-order" class="btn btn-store btn-right"  href="#">Order now</a>');
 
 });
 

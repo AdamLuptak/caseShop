@@ -111,6 +111,34 @@
             </div>
             <div class="col-md-5 col-xs-5"></div>
         </div>
+        <div id="project-modal" class="modal " style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a class="close" href="#" data-dismiss="modal"><i class="fa fa-times fa-2x"></i></a>
+                        <div class="loader" style="display: block;"></div>
+                        <div class="screen"></div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div id="project-sidebar" class="col-md-4 ">
+                                    <h2 id="sdbr-title" style="color:black">Flat UI-Kit</h2>
+                                    <div>
+                                        <div id="sdbr-price" style="color:#C6C6C6">{{pricee}}</div>
+                                        <!-- <div id="sdbr-oldprice">500</div> -->
+                                    </div>
+                                </div>
+                                <div id="project-content" class="col-md-8 ">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                </div>
+                                <div id="buttonOrder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- end of product catalogue -->
     <!-- start of shiping timer utility -->
@@ -480,6 +508,7 @@
     <script type="text/javascript" src="scripts/controller/productCatalogController.js"></script>
     <script type="text/javascript" src="scripts/directive/owlDirective/owlDirective.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="scripts/directive/modal/modal.js"></script>
 </body>
 
 </html>

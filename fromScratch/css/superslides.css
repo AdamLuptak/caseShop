@@ -55,9 +55,9 @@
 .slides-navigation a.next:hover,
 .slides-navigation a.prev:hover {
   color:#FFF;
-  background:#23A657;
+  background:#C6C6C6;
   text-decoration: none;
-  border-color: #23A657;
+  border-color: #C6C6C6;
 }
 
 .slides-pagination {
