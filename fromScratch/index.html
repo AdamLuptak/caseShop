@@ -111,34 +111,64 @@
             </div>
             <div class="col-md-5 col-xs-5"></div>
         </div>
-        <div id="project-modal" class="modal " style="display: none;" aria-hidden="true">
+        <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
+                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <a class="close" href="#" data-dismiss="modal"><i class="fa fa-times fa-2x"></i></a>
-                        <div class="loader" style="display: block;"></div>
-                        <div class="screen"></div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div id="project-sidebar" class="col-md-4 ">
-                                    <h2 id="sdbr-title" style="color:black">Flat UI-Kit</h2>
-                                    <div>
-                                        <div id="sdbr-price" style="color:#C6C6C6">{{pricee}}</div>
-                                        <!-- <div id="sdbr-oldprice">500</div> -->
+                        <button type="button" style=" z-index: 0" class="close fa-4x" data-dismiss="modal">&times;</button>
+                        <div class="row">
+                            <div class="col-md-3" style="margin-top:10%">
+                                <a class="" style="color:black" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-5x prev "></i></a>
+                            </div>
+                            <div id="myCarousel" class="col-md-6 text-center carousel slide">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="active item">
+                                        <img id="img1" src="http://placehold.it/300x200/888&text=Item 1" />
+                                    </div>
+                                    <div class="item">
+                                        <img id="img2" src="http://placehold.it/300x200/aaa&text=Item 2" />
+                                    </div>
+                                    <div class="item">
+                                        <img id="img3" src="http://placehold.it/300x200/444&text=Item 3" />
+                                    </div>
+                                    <div class="item">
+                                        <img id="img4" src="http://placehold.it/300x200/444&text=Item 4" />
+                                    </div>
+                                    <div class="item">
+                                        <img id="img5" src="http://placehold.it/300x200/444&text=Item 5" />
                                     </div>
                                 </div>
-                                <div id="project-content" class="col-md-8 ">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                <!-- Carousel nav -->
+                            </div>
+                            <div class="col-md-3" style="margin-top:10%">
+                                <a class="" href="#myCarousel" style="color:black" data-slide="next"><i  class="fa fa-chevron-circle-right fa-5x next "></i></a>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h2 id="sdbr-title" style="color:black margin-top:3em"></h2>
+                                    <h2 id="sdbr-title" style="color:black margin-top:3em"></h2>
+                                    <div id="sdbr-price" style="color:black "></div>
                                 </div>
-                                <div id="buttonOrder"></div>
+                                <div class="col-md-2">
+                                </div>
+                                    <h2 id="sdbr-title" style="color:black margin-top:3em"></h2>
+                                <div class="col-md-7  text-left" style="color:black ">
+                                    <p id="desc-modal"></p>
+                                </div>
+                                <div class="modal-footer" style="background-color:#f2f2f2">
+                                    <div class="row" ><a href="#orderform">
+                                        <div class="col-md-12 text-center " style="margin-top:5em">
+                                        <button type="button" class="btn btn-store smooth-scroll" data-dismiss="modal" ng-click="modalRedirect()" >Order</button></a>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- end of product catalogue -->
     <!-- start of shiping timer utility -->
@@ -222,8 +252,8 @@
                     <div class="input-group">
                         <input id="newsletter-mail" name="email" placeholder="Enter your email" class="form-control input-lg" type="email">
                         <span class="input-group-btn">
-<button name="submit" type="submit" class="btn btn-store">Subscribe!</button>
-</span>
+                        <button name="submit" type="submit" class="btn btn-store">Subscribe!</button>
+                    </span>
                     </div>
                     <input type="hidden" name="submitted" id="submitted2" value="true">
                 </form>
@@ -353,8 +383,8 @@
                         <div class="input-group ">
                             <input placeholder="Coupon code" class="form-control input-lg" type="text">
                             <span class="input-group-btn">
-<button name="submit" type="submit" class="btn btn-store">Check!</button>
-</span>
+                            <button name="submit" type="submit" class="btn btn-store">Check!</button>
+                        </span>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
@@ -509,6 +539,9 @@
     <script type="text/javascript" src="scripts/directive/owlDirective/owlDirective.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="scripts/directive/modal/modal.js"></script>
+    <script type="text/javascript">
+    $('product-picture').css("width", "100px");
+    </script>
 </body>
 
 </html>

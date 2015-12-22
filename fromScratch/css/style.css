@@ -1135,7 +1135,7 @@ form p {
     color:#fff;
     border:none;
     text-align:center;
-    height: 600px;
+    height: 400px;
 }
 
 .modal-header .col-sm-12 {
@@ -1246,4 +1246,36 @@ body.modal-open {
     /* font-weight: 600; */
     margin-bottom: 0;
 
+}
+
+.img-products{
+    width: 50%;
+    height: 50%
+}
+
+import url('//netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css');
+
+#myCarousel {
+  margin-top: 40px;
+}
+
+.carousel-linked-nav,
+.item img {
+  display: block; 
+  margin: 0 auto;
+}
+
+.carousel-linked-nav {
+  width: 120px;
+  margin-bottom: 20px;   
+}
+
+.picture-modal{
+    width: 50px;
+}
+
+#img1, #img2, #img3, #img4, #img5 {
+   max-width: 400px;
+   max-height: 300px;
+   border-radius: 15px;
 }

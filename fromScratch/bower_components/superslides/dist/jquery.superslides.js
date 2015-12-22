@@ -152,15 +152,15 @@ var css = {
     var $images = that.$container.find('img')
                                  .not(that.options.elements.preserve)
 
-    $images.removeAttr('width').removeAttr('height')
-      .css({
+    $images.css({
         "-webkit-backface-visibility": 'hidden',
         "-ms-interpolation-mode": 'bicubic',
         "position": 'absolute',
         "left": '0',
         "top": '0',
         "z-index": '-1',
-        "max-width": 'none'
+        "max-width": 'none',
+        
       });
 
     $images.each(function() {

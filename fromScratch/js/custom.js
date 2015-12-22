@@ -4,7 +4,26 @@ $(document).ready(function() {
     new WOW().init({
         offset: 20
     });
+$('#myCarousel').carousel({
+  interval: 3000
+});
+$('.carousel-linked-nav > li > a').click(function() {
 
+    // grab href, remove pound sign, convert to number
+    var item = Number($(this).attr('href').substring(1));
+
+    // slide to number -1 (account for zero indexing)
+    $('#myCarousel').carousel(item - 1);
+
+    // remove current active class
+    $('.carousel-linked-nav .active').removeClass('active');
+
+    // add active class to just clicked on item
+    $(this).parent().addClass('active');
+
+    // don't follow the link
+    return false;
+});
 
     /* Hero slider ======================================= */
 
@@ -26,7 +45,6 @@ $(document).ready(function() {
         lazyLoad: true
 
     });
-
 
 
     /* slideshowSwitch ======================================= */
@@ -68,6 +86,50 @@ $(document).ready(function() {
     $('.carousel').carousel();
     /* Project Preview  ==============================================*/
     $('#buttonOrder').append('<a id="btn-order" class="btn btn-store btn-right"  href="#">Order now</a>');
+   
+
+// invoke the carousel
+$('#myCarousel').carousel({
+  interval: 3000
+});
+
+/* SLIDE ON CLICK */ 
+
+$('.carousel-linked-nav > li > a').click(function() {
+
+    // grab href, remove pound sign, convert to number
+    var item = Number($(this).attr('href').substring(1));
+
+    // slide to number -1 (account for zero indexing)
+    $('#myCarousel').carousel(item - 1);
+
+    // remove current active class
+    $('.carousel-linked-nav .active').removeClass('active');
+
+    // add active class to just clicked on item
+    $(this).parent().addClass('active');
+
+    // don't follow the link
+    return false;
+});
+
+/* AUTOPLAY NAV HIGHLIGHT */
+
+// bind 'slid' function
+$('#myCarousel').bind('slid', function() {
+
+    // remove active class
+    $('.carousel-linked-nav .active').removeClass('active');
+
+    // get index of currently active item
+    var idx = $('#myCarousel .item.active').index();
+
+    // select currently active item and add active class
+    $('.carousel-linked-nav li:eq(' + idx + ')').addClass('active');
+
+});
+
+
 
 });
 
