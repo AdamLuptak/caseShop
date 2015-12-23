@@ -52,8 +52,7 @@ $scope.modalRedirect = function(){
             $scope.showModal = true;
 
 
-            $('#sdbr-title').text(title);
-            $('#sdbr-price').text(price);
+            
 
 
 
@@ -72,6 +71,8 @@ $scope.modalRedirect = function(){
             //  slidesHtml = slidesHtml + '</div><nav class="slides-navigation"><a href="#" class="next"><i class="glyphicon glyphicon-chevron-right"></i></a><a href="#" class="prev"><i class="glyphicon glyphicon-chevron-left"></i></a></nav>';
             console.log($scope.clickedProduct);
             $('#desc-modal').text($scope.clickedProduct.description);
+            $('#sdbr-title').text( $scope.clickedProduct.product_name);
+            $('#sdbr-price').text( $scope.clickedProduct.price);
 
 
 
