@@ -8,7 +8,7 @@ require 'functions.php';
 
 //connect to DB 
 R::setup('mysql:host=localhost;dbname=caseShop',
-    'root','admin');
+  'root','admin');
 //first must Connect to DB create data
 //require 'insertProducts.php';
 
@@ -33,18 +33,18 @@ $app->get('/products', function () use ($app) {
  */
 $app->get('/products/:name', function ($name) use ($app) {  
   // query database for all articles
-    if($name != null){
-      $product = R::find( 'products', ' product_name LIKE ? ', [ $name ] );
-      if($product !=null){
+  if($name != null){
+    $product = R::find( 'products', ' product_name LIKE ? ', [ $name ] );
+    if($product !=null){
   // send response header for JSON content type
-          $app->response()->header('Content-Type', 'application/json');
+      $app->response()->header('Content-Type', 'application/json');
   // return JSON-encoded response body with query results
-          echo json_encode(R::exportAll($product));
-      }else{
-        $app->response()->status(404);
+      echo json_encode(R::exportAll($product));
+    }else{
+      $app->response()->status(404);
     }
-}else{
-}
+  }else{
+  }
 });
 //updateProduct
 
@@ -53,27 +53,52 @@ $app->get('/products/:name', function ($name) use ($app) {
 //deleteProduct
 
 // run
+
+//post order
+//$app->post('/order', 'addOrder' use ($app));
+
+/**
+ *comsume post request and check if data is valid than
+ *create order and store into databasem and send email to customer
+ *and to admin, 
+ */
+$app->post("/order", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $order = $app->request();
+  $orderObject = $order->getBody();
+  $jsonFromPost = json_decode($orderObject);
+
+  if(orderValidation($jsonFromPost) != 1){
+    //wrong input sent error response
+  }
+  else{
+    //validation OK sent succes response 
+    createOrder($jsonFromPost);
+  }
+
+});
+
+/**
+ * email for information for sending news
+ */
+$app->post("/stayInTouch", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $order = $app->request();
+  $orderObject = $order->getBody();
+  $jsonFromPost = json_decode($orderObject);
+  echo "bavi ";
+});
+
+/**
+ * contact message
+ */
+$app->post("/contact", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $order = $app->request();
+  $orderObject = $order->getBody();
+  $jsonFromPost = json_decode($orderObject);
+  echo "bavi ";
+});
+
 $app->run();
-
-
-
-//     $images = R::find('images'); 
-// $village = R::load('products',1);
-//     list($mill,$tavern) = R::dispense('img',2);
-//     $mill->url="img/011.jpg";
-//     $tavern->url="img/012.jpg";
-//     //replaces entire list
-//     $village->ownBuilding = array($mill,$tavern);
-
-//   //  R::store($village);    
-//    $bottles = R::find( 'products' );
-
-//   if ( !count( $bottles ) ) die( "The cellar is empty!\n" );
-//   foreach( $bottles as $b ) {
-//      $jset = json_decode($b, true);
-//      echo $jset["ProductName"] . "\n";
-//     //echo $b. "Product1\n";
-//   }
-
-
 ?>

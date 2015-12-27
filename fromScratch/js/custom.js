@@ -1,29 +1,53 @@
 $(document).ready(function() {
+
+
+    /**
+     * togle text a,b 
+     * @param a,b
+     *@return object
+     */
+    jQuery.fn.extend({
+        toggleText: function(a, b) {
+            var isClicked = false;
+            var that = this;
+            this.click(function() {
+                if (isClicked) {
+                    that.text(a);
+                    isClicked = false;
+                } else {
+                    that.text(b);
+                    isClicked = true;
+                }
+            });
+            return this;
+        }
+    });
+
     /* wow ======================================= */
 
     new WOW().init({
         offset: 20
     });
-$('#myCarousel').carousel({
-  interval: 3000
-});
-$('.carousel-linked-nav > li > a').click(function() {
+    $('#Carousel').carousel({
+        interval: 3000
+    });
+    $('.carousel-linked-nav > li > a').click(function() {
 
-    // grab href, remove pound sign, convert to number
-    var item = Number($(this).attr('href').substring(1));
+        // grab href, remove pound sign, convert to number
+        var item = Number($(this).attr('href').substring(1));
 
-    // slide to number -1 (account for zero indexing)
-    $('#myCarousel').carousel(item - 1);
+        // slide to number -1 (account for zero indexing)
+        $('#Carousel').carousel(item - 1);
 
-    // remove current active class
-    $('.carousel-linked-nav .active').removeClass('active');
+        // remove current active class
+        $('.carousel-linked-nav .active').removeClass('active');
 
-    // add active class to just clicked on item
-    $(this).parent().addClass('active');
+        // add active class to just clicked on item
+        $(this).parent().addClass('active');
 
-    // don't follow the link
-    return false;
-});
+        // don't follow the link
+        return false;
+    });
 
     /* Hero slider ======================================= */
 
@@ -67,11 +91,39 @@ $('.carousel-linked-nav > li > a').click(function() {
         );
     });
     /* show about more  ======================================= */
+    var lableSwitch = false;
     $("#show-btn").click(function() {
-        $('#showme').slideDown("slow");
-        $(this).hide();
+        // $('#showme').slideDown("slow");
+
+        // $(this).hide();
+
+        if (lableSwitch) {
+            lableSwitch = !lableSwitch;
+            $('#label-shop').slideDown("fast");
+            $('#label-shop2').hide();
+        } else {
+            lableSwitch = !lableSwitch;
+            $('#label-shop2').slideDown("fast");
+            $('#label-shop').hide();
+        }
+        $('#showme').slideToggle();
+
         return false;
     });
+
+    $("#hide-btn").click(function() {
+        if (lableSwitch) {
+            lableSwitch = !lableSwitch;
+            $('#label-shop').slideDown("fast");
+            $('#label-shop2').hide();
+        } else {
+            lableSwitch = !lableSwitch;
+            $('#label-shop2').slideDown("fast");
+            $('#label-shop').hide();
+        }
+        $('#showme').slideToggle();
+    });
+    $('#show-btn').toggleText("See all products", "Hide all products");
 
     /* One Page Navigation Setup ======================================= */
     $('#main-nav').singlePageNav({
@@ -86,50 +138,68 @@ $('.carousel-linked-nav > li > a').click(function() {
     $('.carousel').carousel();
     /* Project Preview  ==============================================*/
     $('#buttonOrder').append('<a id="btn-order" class="btn btn-store btn-right"  href="#">Order now</a>');
-   
-
-// invoke the carousel
-$('#myCarousel').carousel({
-  interval: 3000
-});
-
-/* SLIDE ON CLICK */ 
-
-$('.carousel-linked-nav > li > a').click(function() {
-
-    // grab href, remove pound sign, convert to number
-    var item = Number($(this).attr('href').substring(1));
-
-    // slide to number -1 (account for zero indexing)
-    $('#myCarousel').carousel(item - 1);
-
-    // remove current active class
-    $('.carousel-linked-nav .active').removeClass('active');
-
-    // add active class to just clicked on item
-    $(this).parent().addClass('active');
-
-    // don't follow the link
-    return false;
-});
-
-/* AUTOPLAY NAV HIGHLIGHT */
-
-// bind 'slid' function
-$('#myCarousel').bind('slid', function() {
-
-    // remove active class
-    $('.carousel-linked-nav .active').removeClass('active');
-
-    // get index of currently active item
-    var idx = $('#myCarousel .item.active').index();
-
-    // select currently active item and add active class
-    $('.carousel-linked-nav li:eq(' + idx + ')').addClass('active');
-
-});
 
 
+    // invoke the carousel
+    $('#Carousel').carousel({
+        interval: 3000
+    });
+
+    /* SLIDE ON CLICK */
+
+    $('.carousel-linked-nav > li > a').click(function() {
+
+        // grab href, remove pound sign, convert to number
+        var item = Number($(this).attr('href').substring(1));
+
+        // slide to number -1 (account for zero indexing)
+        $('#Carousel').carousel(item - 1);
+
+        // remove current active class
+        $('.carousel-linked-nav .active').removeClass('active');
+
+        // add active class to just clicked on item
+        $(this).parent().addClass('active');
+
+        // don't follow the link
+        return false;
+    });
+
+    /* AUTOPLAY NAV HIGHLIGHT */
+
+    // bind 'slid' function
+    $('#Carousel').bind('slid', function() {
+
+        // remove active class
+        $('.carousel-linked-nav .active').removeClass('active');
+
+        // get index of currently active item
+        var idx = $('#Carousel .item.active').index();
+
+        // select currently active item and add active class
+        $('.carousel-linked-nav li:eq(' + idx + ')').addClass('active');
+
+    });
+
+    $('.navbar-inverse .navbar-nav>li>a').click(function() {
+        var size = $(window).width();
+        if (size < 753) {
+            $(this).attr('data-toggle', "collapse");
+            $(this).attr('data-target', ".navbar-collapse")
+        } else {
+            $(this).removeAttr('data-toggle', "collapse");
+            $(this).removeAttr('data-target', ".navbar-collapse")
+        }
+    });
+
+    $('#product-slide').singlePageNav({
+        offset: $('.navbar').height(),
+        speed: 750,
+        currentClass: 'active',
+        filter: ':not(.external)',
+        beforeStart: function() {},
+        onComplete: function() {}
+    });
 
 });
 
