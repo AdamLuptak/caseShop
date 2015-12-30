@@ -56,4 +56,19 @@ $price= 200;
 
 createNewProduct($productName,$description,$price,$links);
 
+
+//create CategoryTable
+$category = R::dispense("category");
+$category->productNumber = "PedalBoard";
+$id = R::store($category);
+
+$category = R::dispense("category");
+$category->productNumber = "Rack";
+$id = R::store($category);
+ 
+$category = R::dispense("category");
+$category->productNumber = "Intrument case";
+$id = R::store($category);
+
+
 ?>

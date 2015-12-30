@@ -1,0 +1,10 @@
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Categories</strong></div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-click="clickCategory(category,$index)" ng-repeat="category in categoriesData" ng-class="{'active':$index == actualCategory}"><a href="#Subtab2" >{{category.category}}</a></li>  
+            </ul>
+        </div>
+    </div>
+</div>

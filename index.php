@@ -46,6 +46,20 @@ $app->get('/products/:name', function ($name) use ($app) {
   }else{
   }
 });
+
+/**
+ * get catgerorie namesfor category directive
+ */
+$app->get('/categories', function () use ($app) {  
+  // query database for all articles
+  $categories = R::find('category'); 
+  // send response header for JSON content type
+  $app->response()->header('Content-Type', 'application/json');
+  // return JSON-encoded response body with query results
+  echo json_encode(R::exportAll($categories));
+});
+
+
 //updateProduct
 
 //insertProduct
@@ -99,6 +113,7 @@ $app->post("/contact", function () use($app, $db) {
   $jsonFromPost = json_decode($orderObject);
   echo "bavi ";
 });
+
 
 $app->run();
 ?>

@@ -1,0 +1,9 @@
+<div class="thumbnail">
+    <img style="width: 300px; height: 200px;" alt="300x200" src="{{productActual.ownImgurl[0].url}}">
+    <div class="caption">
+        <h4>{{productActual.product_name}}</h4>
+        <p><strike>Euro {{productActual.price}}</strike>&nbsp;Euro {{productActual.price}}</p>
+        <a class="btn btn-primary" ng-click="viewItem(productActual)" href="#">View</a>
+        <a class="btn btn-success" ng-click="addItem(productActual)" href="#">Add to Cart</a>
+    </div>
+</div>
