@@ -30,7 +30,7 @@
     </style>
 </head>
 
-<body id="home" ng-app="storeApp">
+<body id="home" ng-app="storeApp" ng-controller="ProductCatalogController">
     <!-- start of  nav-bar -->
     <div id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -55,7 +55,10 @@
                             <li><a href="#">UK</a></li>
                             <li><a href="#">SK</a></li>
                         </ul>
-                    </li>
+                    <!-- </li>
+                    <li><a href="#orderform"></a></li> -->
+                    <li >
+                   <a href="#orderform"><i class="fa fa-shopping-cart fa-2x"></i> <span class="badge">{{productOrderNumber}}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -88,7 +91,7 @@
     </section>
     <!-- end of carousel -->
     <!-- start of product catalogue -->
-    <section id="products" ng-controller="ProductCatalogController">
+    <section id="products" >
         <div container>
             <div class="col-md-1 col-xs-1 visible-lg-block" style="margin-top: 8% ;">
                 <i id="lavo" class="fa fa-chevron-circle-left fa-5x prev "></i>
@@ -169,8 +172,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-right " style="margin-top:10%">
-                                    <button id="buttonModalOrder" type="button" class="btn btn-store smooth-scroll"  ng-click="modalRedirect()" data-dismiss="modal" >Order</button>
-                                    <button type="button" class="btn btn-store smooth-scroll"  data-dismiss="modal">Close</button>
+                                    <button id="buttonModalOrder" type="button" class="btn btn-store smooth-scroll" ng-click="modalRedirect()" data-dismiss="modal">Order</button>
+                                    <button type="button" class="btn btn-store smooth-scroll" data-dismiss="modal">Close</button>
                                     <hr/>
                                 </div>
                             </div>
@@ -179,7 +182,7 @@
     </section>
     <!-- end of product catalogue -->
     <!-- start of shiping timer utility -->
-    <section id="product-slide" class="gray-bg padding-top-bottom " ng-controller="ProductCatalogController">
+    <section id="product-slide" class="gray-bg padding-top-bottom " >
         <div class="container">
             <div class="row">
                 <div class="col-md-8 wow fadeInLeft">
@@ -294,7 +297,7 @@
     </section>
     <!-- end of stayInTouch -->
     <!-- start of order form -->
-    <section id="orderform" class="gray-bg padding-top-bottom" ng-controller="orderController">
+    <section id="orderform" class="gray-bg padding-top-bottom" >
         <div class="container">
             <header class="section-header text-center">
                 <h2>Order Form</h2>
@@ -315,35 +318,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="vert-align">Bed</td>
-                                    <td class="vert-align">{{ 700 | currency:"$":0 }}</td>
+                                <tr ng-repeat="product in orderedProducts track by $index">
+                                    <td class="vert-align">{{product.product_name}}</td>
+                                    <td class="vert-align">{{ product.price | currency:"$":0 }}</td>
                                     <td class="text-center">
-                                        <select class="form-control form-control-inline" ng-model="myBed" ng-options="opt as opt.label for opt in options"></select>
+                                        <select class="form-control form-control-inline" ng-model="myBed" ng-options="opt as opt.label for opt in options" ng-change="selected(myBed,product)"></select>
                                     </td>
-                                    <td class="text-right vert-align">{{ myBed.value * 700 | currency:"$":0 }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="vert-align">Nightstand</td>
-                                    <td class="vert-align">{{ 400 | currency:"$":0 }}</td>
-                                    <td class="text-center">
-                                        <select class="form-control form-control-inline" ng-model="myNightstand" ng-options="opt as opt.label for opt in options"></select>
-                                    </td>
-                                    <td class="text-right vert-align">{{ myNightstand.value * 400 | currency:"$":0 }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="vert-align">Hammock</td>
-                                    <td class="vert-align">{{ 600 | currency:"$":0 }}</td>
-                                    <td class="text-center">
-                                        <select class="form-control form-control-inline" ng-model="myHammock" ng-options="opt as opt.label for opt in options"></select>
-                                    </td>
-                                    <td class="text-right vert-align">{{ myHammock.value * 600 | currency:"$":0 }}</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td id="price{{$index}}" class="text-right vert-align">{{ myBed.value * product.price | currency:"$":0 }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -568,8 +549,8 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <!-- services -->
     <script type="text/javascript" src="scripts/service/allProductsService.js"></script>
-     <script type="text/javascript" src="scripts/service/cartService.js"></script>
-     <!-- controllers -->
+    <script type="text/javascript" src="scripts/service/cartService.js"></script>
+    <!-- controllers -->
     <script type="text/javascript" src="scripts/controller/productCatalogController.js"></script>
     <script type="text/javascript" src="scripts/directive/owlDirective/owlDirective.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>

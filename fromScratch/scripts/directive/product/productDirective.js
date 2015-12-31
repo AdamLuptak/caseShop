@@ -30,7 +30,8 @@ app.directive('product', ['cartService', function(cartService) {
         restrict: 'E',
         templateUrl: 'scripts/directive/product/productDirective.html',
         scope: {
-            productActual: '='
+            productActual: '=',
+            attr4:      '=attr4' ,
         },
         link: function(scope, element, attrs) {
 
@@ -40,7 +41,11 @@ app.directive('product', ['cartService', function(cartService) {
              */
             scope.addItem = function(product) {
                 cartService.addProduct(product);
-            }
+                scope.$parent.addItemDirective();
+               
+           }
+
+
         }
     };
 }]);

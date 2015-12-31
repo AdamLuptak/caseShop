@@ -3,6 +3,8 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
 
     $scope.pricee = 500;
 
+    $scope.productOrderNumber = 0;
+
     $scope.showModal = false;
     $scope.toggleModal = function() {
         $scope.showModal = !$scope.showModal;
@@ -50,8 +52,14 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     $scope.modalRedirect = function() {
         cartService.addProduct(clickedModal.getItem());
         console.log(cartService.allProducts());
+        $scope.orderedProducts = cartService.allProducts();
+        $scope.productOrderNumber = $scope.orderedProducts.length;
         window.location.href = '#orderform';
 
+    }
+    $scope.addItemDirective = function(product) {
+        $scope.orderedProducts = cartService.allProducts();
+        $scope.productOrderNumber = $scope.orderedProducts.length;
     }
 
 
@@ -131,24 +139,6 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
         // });
     });
 
-}]);
-
-app.service('clickedModal', [function() {
-
-    this.item = 0;
-
-    this.setItem = function(item) {
-        this.item = item;
-    }
-
-    this.getItem = function() {
-        return this.item;
-    }
-}])
-
-
-
-app.controller('orderController', ['$scope', function($scope) {
 
     $scope.options = [{
         label: '0',
@@ -169,6 +159,75 @@ app.controller('orderController', ['$scope', function($scope) {
         label: '5',
         value: 5
     }];
+    $scope.orderedProducts = 0;
+
+    $scope.orderedProducts = cartService.allProducts();
+    $scope.selected = function(event, product) {
+        console.log(event.value + " " + product.price)
+        $scope.myBed = 200;
+    }
+    $scope.totalPrice = 200;
+
+    $scope.myBed = $scope.options[0];
+    $scope.myNightstand = $scope.options[0];
+    $scope.myHammock = $scope.options[0];
+    $scope.$watch(
+        "myBed",
+        function(newValue, oldValue) {
+            oldValue = newValue;
+            console.log("appController.fooCount:");
+        }
+    );
+
+
+}]);
+
+app.service('clickedModal', [function() {
+
+    this.item = 0;
+
+    this.setItem = function(item) {
+        this.item = item;
+    }
+
+    this.getItem = function() {
+        return this.item;
+    }
+}])
+
+
+
+app.controller('orderController', ['$scope', 'cartService', function($scope, cartService) {
+
+    $scope.options = [{
+        label: '0',
+        value: 0
+    }, {
+        label: '1',
+        value: 1
+    }, {
+        label: '2',
+        value: 2
+    }, {
+        label: '3',
+        value: 3
+    }, {
+        label: '4',
+        value: 4
+    }, {
+        label: '5',
+        value: 5
+    }];
+    $scope.orderedProducts = 0;
+    $scope.orderedProducts = cartService.allProducts();
+    $scope.$watch(
+        "orderedProducts",
+        function handleFooChange(newValue, oldValue) {
+            console.log("appController.fooCount:", newValue);
+        }
+    );
+
+
 
     $scope.myBed = $scope.options[0];
     $scope.myNightstand = $scope.options[0];

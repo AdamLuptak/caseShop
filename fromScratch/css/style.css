@@ -10,6 +10,11 @@ body {
     font-weight: 300;
 }
 
+#cartSum{
+   color: #CCC;
+    line-height: 30px;
+}
+
 p {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
