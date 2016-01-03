@@ -7,7 +7,7 @@
  *
  * Service for shoping cart
  */
-app.service('cartService', ['$http', function($http) {
+ app.service('cartService', ['$http', function($http) {
     /**
      * Json cart object Array with object products
      */
@@ -28,8 +28,7 @@ app.service('cartService', ['$http', function($http) {
      * @param item 
      */
      this.deleteProduct = function(product){
-     	 productName = proct.product_name; 
-     	 this.cart.splice(this.cart.indexOf(product),1);
+         this.cart.splice(this.cart.indexOf(product),1);
      }
 
      /**
@@ -42,9 +41,9 @@ app.service('cartService', ['$http', function($http) {
      /**
       * Give all items from cart
       */
-     this.allProducts = function(){
+      this.allProducts = function(){
       	return this.cart;
       }
 
 
-}]);
+  }]);

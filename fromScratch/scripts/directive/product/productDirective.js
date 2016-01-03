@@ -41,7 +41,7 @@ app.directive('product', ['cartService', function(cartService) {
              */
             scope.addItem = function(product) {
                 cartService.addProduct(product);
-                scope.$parent.addItemDirective();
+                scope.$parent.addItemDirective(product);
                
            }
 

@@ -6,6 +6,9 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     $scope.productOrderNumber = 0;
 
     $scope.showModal = false;
+
+    $scope.totalSumCost = 0;
+
     $scope.toggleModal = function() {
         $scope.showModal = !$scope.showModal;
     };
@@ -50,19 +53,42 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
      * order Item from Modal and redirect to orderForm
      */
     $scope.modalRedirect = function() {
-        cartService.addProduct(clickedModal.getItem());
-        console.log(cartService.allProducts());
-        $scope.orderedProducts = cartService.allProducts();
-        $scope.productOrderNumber = $scope.orderedProducts.length;
-        window.location.href = '#orderform';
+            cartService.addProduct(clickedModal.getItem());
+            console.log(cartService.allProducts());
+            $scope.orderedProducts = cartService.allProducts();
+            $scope.productOrderNumber = $scope.orderedProducts.length;
+            if ($scope.productOrderNumber > 0) {
+                angular.element("#shopingCartIcon").css('color', 'green')
+            }
+            $scope.totalSumCost += parseInt(clickedModal.getItem().price);
+            window.location.href = '#orderform';
 
-    }
+        }
+        /*
+         * Add item to array in service
+         */
     $scope.addItemDirective = function(product) {
         $scope.orderedProducts = cartService.allProducts();
         $scope.productOrderNumber = $scope.orderedProducts.length;
+        if ($scope.productOrderNumber > 0) {
+            angular.element("#shopingCartIcon").css('color', '#23A657')
+        }
+        $scope.totalSumCost += parseInt(product.price);
     }
 
-
+    /*
+     * Delete data from cart thrue cart service 
+     * @param product
+     */
+    $scope.deleteDataFromCart = function(product, price) {
+        cartService.deleteProduct(product);
+        if ($scope.productOrderNumber > 0) {
+            $scope.productOrderNumber--;
+            $scope.totalSumCost -= parseInt(price.value) * parseInt(product.price) ;
+        }
+        if ($scope.productOrderNumber == 0)
+            angular.element("#shopingCartIcon").css('color', '#CCC')
+    }
 
     $scope.products = 'sdsd';
     $scope.clickedProduct;
@@ -125,18 +151,6 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
             });
 
         })
-
-        // /**
-        //  * On click add item to cart and redirect to orderForm
-        //  */
-        // $("#buttonModalOrder").on("click", function(event) {
-
-
-
-        //         title = $("#sdbr-title");
-        //     $scope.clickedProduct = $scope.findProductInJSON(title, $scope.productData);
-        //     console.log($scope.clickedProduct);
-        // });
     });
 
 
@@ -164,15 +178,16 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     $scope.orderedProducts = cartService.allProducts();
     $scope.selected = function(event, product) {
         console.log(event.value + " " + product.price)
-        $scope.myBed = 200;
+        $scope.totalSumCost += parseInt(event.value) * parseInt(product.price);
+        $scope.totalSumCost -= parseInt(product.price);
     }
     $scope.totalPrice = 200;
 
-    $scope.myBed = $scope.options[0];
+    $scope.selectedOptions = $scope.options[1];
     $scope.myNightstand = $scope.options[0];
     $scope.myHammock = $scope.options[0];
     $scope.$watch(
-        "myBed",
+        "totalSumCost",
         function(newValue, oldValue) {
             oldValue = newValue;
             console.log("appController.fooCount:");

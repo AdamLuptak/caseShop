@@ -58,7 +58,7 @@
                     <!-- </li>
                     <li><a href="#orderform"></a></li> -->
                     <li >
-                   <a href="#orderform"><i class="fa fa-shopping-cart fa-2x"></i> <span class="badge">{{productOrderNumber}}</span></a></li>
+                   <a href="#orderform"><i  id="shopingCartIcon" class="fa fa-shopping-cart fa-2x"></i> <span class="badge">{{productOrderNumber}}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -322,9 +322,10 @@
                                     <td class="vert-align">{{product.product_name}}</td>
                                     <td class="vert-align">{{ product.price | currency:"$":0 }}</td>
                                     <td class="text-center">
-                                        <select class="form-control form-control-inline" ng-model="myBed" ng-options="opt as opt.label for opt in options" ng-change="selected(myBed,product)"></select>
+                                        <select class="form-control form-control-inline" ng-model="selectedOptions" ng-init="selectedOptions" ng-options="opt as opt.label for opt in options" ng-change="selected(selectedOptions,product)"></select>
                                     </td>
-                                    <td id="price{{$index}}" class="text-right vert-align">{{ myBed.value * product.price | currency:"$":0 }}</td>
+                                    <td id="price{{$index}}" class="text-right vert-align">{{ selectedOptions.value * product.price | currency:"$":0 }}</td>
+                                    <td> <button type="button" style="margin-right: 3%" class="close fa-4x" ng-click="deleteDataFromCart(product,selectedOptions)">&times;</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -433,7 +434,7 @@
                                 <tr>
                                     <td>Total:</td>
                                     <td></td>
-                                    <td id="total" class="text-right">{{ (myBed.value * 700) + (myNightstand.value * 400) + (myHammock.value * 600) | currency }}</td>
+                                    <td id="total" class="text-right">{{totalSumCost | currency }}</td>
                                 </tr>
                             </tbody>
                         </table>
