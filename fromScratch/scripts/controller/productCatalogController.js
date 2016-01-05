@@ -17,7 +17,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
      *@param title, data
      *@return object form json array products
      */
-    $scope.findProductInJSON = function(title, datas) {
+     $scope.findProductInJSON = function(title, datas) {
         for (data in datas) {
             if (datas[data].product_name === title) {
                 return datas[data];
@@ -28,7 +28,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     /**
      * calculate how many page I need for pagin products
      */
-    $scope.pagaCalculator = function(productData) {
+     $scope.pagaCalculator = function(productData) {
         var pageArray = new Array();
         var counter = 0;
         var page = 0;
@@ -45,50 +45,126 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     /**
      * actual page 7 item on 1 page
      */
-    $scope.actualPage = function() {
+     $scope.actualPage = function() {
 
-    }
+     }
 
     /**
      * order Item from Modal and redirect to orderForm
      */
-    $scope.modalRedirect = function() {
-            cartService.addProduct(clickedModal.getItem());
-            console.log(cartService.allProducts());
-            $scope.orderedProducts = cartService.allProducts();
-            $scope.productOrderNumber = $scope.orderedProducts.length;
-            if ($scope.productOrderNumber > 0) {
-                angular.element("#shopingCartIcon").css('color', 'green')
-            }
-            $scope.totalSumCost += parseInt(clickedModal.getItem().price);
-            window.location.href = '#orderform';
-
-        }
-        /*
-         * Add item to array in service
-         */
-    $scope.addItemDirective = function(product) {
+     $scope.modalRedirect = function() {
+        cartService.addProduct(clickedModal.getItem());
+        console.log(cartService.allProducts());
         $scope.orderedProducts = cartService.allProducts();
         $scope.productOrderNumber = $scope.orderedProducts.length;
         if ($scope.productOrderNumber > 0) {
             angular.element("#shopingCartIcon").css('color', '#23A657')
         }
-        $scope.totalSumCost += parseInt(product.price);
+        $scope.totalSumCost += parseInt(clickedModal.getItem().price);
+        window.location.href = '#orderform';
+
     }
+        /*
+         * Add item to array in service
+         */
+         $scope.addItemDirective = function(product) {
+            $scope.orderedProducts = cartService.allProducts();
+            $scope.productOrderNumber = $scope.orderedProducts.length;
+            if ($scope.productOrderNumber > 0) {
+                angular.element("#shopingCartIcon").css('color', '#23A657')
+            }
+            $scope.totalSumCost += parseInt(product.price);
+        }
 
     /*
      * Delete data from cart thrue cart service 
      * @param product
      */
-    $scope.deleteDataFromCart = function(product, price) {
+     $scope.deleteDataFromCart = function(product, price) {
         cartService.deleteProduct(product);
         if ($scope.productOrderNumber > 0) {
             $scope.productOrderNumber--;
-            $scope.totalSumCost -= parseInt(price.value) * parseInt(product.price) ;
+            $scope.totalSumCost -= parseInt(price.value) * parseInt(product.price);
         }
         if ($scope.productOrderNumber == 0)
             angular.element("#shopingCartIcon").css('color', '#CCC')
     }
+
+    /*
+     * Post data to orderService and send to backend
+     * @param order order object with all information
+     */
+     $scope.postOrder = function(order) {
+        //order.concat($scope.orderedProducts);
+        $scope.orderMerged = $scope.merge(order, $scope.orderedProducts);
+        // POST data
+        $scope.postHelper("http://localhost/caseShop/index.php/order",$scope.orderMerged);
+    }
+
+    /**
+     * sent mail for contact
+     */
+     $scope.sentEmail =function(infoData){
+        $scope.postHelper("http://localhost/caseShop/index.php//contact",infoData);
+    }
+
+     /**
+      * sent mail for information
+      */
+      $scope.sentStayInTouch =function(infoData){
+        $scope.postHelper("http://localhost/caseShop/index.php/stayInTouch",infoData);
+    }
+
+    /**
+     * Go to products
+     */
+     $scope.toProducts =function(){
+       // window.location.href = '#products';
+     }
+
+    /**
+     * Sent post to url
+     * @param url
+     * @param data
+     */
+     $scope.postHelper =function(url,data){
+        $http({
+            url: url,
+            method: "POST",
+            data: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+        }).error(function(data, status, headers, config) {
+            $scope.status = status + ' ' + headers;
+        });
+    }
+
+    /*
+     * Merge two JSON objects
+     * @param obj1 obj2
+     * @return mergeJson result
+     */
+     $scope.merge = function(obj1, obj2) {
+        var result = {};
+        for (i in obj1) {
+            result[i] = obj1[i];
+            if ((i in obj2) && (typeof obj1[i] === "object") && (i !== null)) {
+                result[i] = merge(obj1[i], obj2[i]);
+            }
+        }
+        for (i in obj2) {
+            if (i in result) { //conflict
+                continue;
+            }
+            result[i] = obj2[i];
+        }
+        return result;
+    }
+
+
 
     $scope.products = 'sdsd';
     $scope.clickedProduct;
@@ -115,7 +191,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
         $(".hover-mask2").on("click", function(event) {
             //console.log($("#zmaz"));
             var elem = $(this).parent(),
-                title = elem.find('.project-title').text();
+            title = elem.find('.project-title').text();
             price = elem.find('.project-price').text();
             //console.log(title)
             $scope.showModal = true;
@@ -151,33 +227,34 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
             });
 
         })
-    });
+});
 
 
-    $scope.options = [{
-        label: '0',
-        value: 0
-    }, {
-        label: '1',
-        value: 1
-    }, {
-        label: '2',
-        value: 2
-    }, {
-        label: '3',
-        value: 3
-    }, {
-        label: '4',
-        value: 4
-    }, {
-        label: '5',
-        value: 5
-    }];
-    $scope.orderedProducts = 0;
+$scope.options = [{
+    label: '0',
+    value: 0
+}, {
+    label: '1',
+    value: 1
+}, {
+    label: '2',
+    value: 2
+}, {
+    label: '3',
+    value: 3
+}, {
+    label: '4',
+    value: 4
+}, {
+    label: '5',
+    value: 5
+}];
+$scope.orderedProducts = 0;
 
-    $scope.orderedProducts = cartService.allProducts();
-    $scope.selected = function(event, product) {
-        console.log(event.value + " " + product.price)
+$scope.orderedProducts = cartService.allProducts();
+$scope.selected = function(event, product) {
+        //put to JSON extra field for quantity
+        product.quantity = event.value;
         $scope.totalSumCost += parseInt(event.value) * parseInt(product.price);
         $scope.totalSumCost -= parseInt(product.price);
     }
@@ -192,7 +269,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
             oldValue = newValue;
             console.log("appController.fooCount:");
         }
-    );
+        );
 
 
 }]);
@@ -240,7 +317,7 @@ app.controller('orderController', ['$scope', 'cartService', function($scope, car
         function handleFooChange(newValue, oldValue) {
             console.log("appController.fooCount:", newValue);
         }
-    );
+        );
 
 
 

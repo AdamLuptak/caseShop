@@ -55,10 +55,10 @@
                             <li><a href="#">UK</a></li>
                             <li><a href="#">SK</a></li>
                         </ul>
-                    <!-- </li>
+                        <!-- </li>
                     <li><a href="#orderform"></a></li> -->
-                    <li >
-                   <a href="#orderform"><i  id="shopingCartIcon" class="fa fa-shopping-cart fa-2x"></i> <span class="badge">{{productOrderNumber}}</span></a></li>
+                        <li>
+                            <a href="#orderform"><i  id="shopingCartIcon" class="fa fa-shopping-cart fa-2x"></i> <span class="badge">{{productOrderNumber}}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -76,7 +76,7 @@
                         <li><a href="#link"><i class="fa fa-envelope-o"></i></a></li>
                         <li><a href="#link"><i class="fa fa-mobile"></i></a></li>
                     </ul>
-                    <a class="btn btn-store smooth-scroll" href="#products">browse the goods</a>
+                    <a class="btn btn-store smooth-scroll" ng-click="toProducts()" href="#products">browse the goods</a>         
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
     </section>
     <!-- end of carousel -->
     <!-- start of product catalogue -->
-    <section id="products" >
+    <section id="products">
         <div container>
             <div class="col-md-1 col-xs-1 visible-lg-block" style="margin-top: 8% ;">
                 <i id="lavo" class="fa fa-chevron-circle-left fa-5x prev "></i>
@@ -182,15 +182,16 @@
     </section>
     <!-- end of product catalogue -->
     <!-- start of shiping timer utility -->
-    <section id="product-slide" class="gray-bg padding-top-bottom " >
+    <section id="product-slide" class="gray-bg padding-top-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 wow fadeInLeft">
-                    <h3 id="label-shop" class="center cta-message">Big sale comes util <strong><span id="countdown"></span></strong></h3>
+                    <h3 id="label-shop" class="center cta-message">Best products <strong>CLICK ON SEE ALL PRODUCTS</strong> <span style="margin-left: 25%">  <img src="img/arrow black.gif" width=100 ></span> </h3>
                     <h3 id="label-shop2" style="display:none" class="center cta-message">Case shop Ware-house <strong><span>Buy what you need</span></strong></h3>
                 </div>
+              
                 <div class="col-md-4 text-center wow fadeInRight">
-                    <a class="btn btn-store outline" id="show-btn" href="#product-slide">See all products</a>
+                    <a class="btn btn-store outline" id="show-btn" style="margin-top: 10%;" href="#product-slide">See all products</a>
                 </div>
                 <div class="col-md-12 cta-message wow fadeInUp">
                     <!-- product shop directive -->
@@ -283,11 +284,11 @@
                 <h4>Sign Up for Email Updates on on News & Offers</h4>
             </header>
             <div class="row">
-                <form id="newsletter-form" action="index.html" method="POST" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 ">
+                <form id="newsletter-form" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 ">
                     <div class="input-group">
-                        <input id="newsletter-mail" name="email" placeholder="Enter your email" class="form-control input-lg" type="email">
+                        <input id="contact-mail" ng-model="stayInTouch.email" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
                         <span class="input-group-btn">
-                        <button name="submit" type="submit" class="btn btn-store">Subscribe!</button>
+                        <button name="submit" ng-click="sentStayInTouch(stayInTouch)" class="btn btn-store">Subscribe!</button>
                     </span>
                     </div>
                     <input type="hidden" name="submitted" id="submitted2" value="true">
@@ -297,12 +298,12 @@
     </section>
     <!-- end of stayInTouch -->
     <!-- start of order form -->
-    <section id="orderform" class="gray-bg padding-top-bottom" >
+    <section id="orderform" class="gray-bg padding-top-bottom">
         <div class="container">
             <header class="section-header text-center">
                 <h2>Order Form</h2>
             </header>
-            <form action="index.html" method="post" novalidate id="order-form">
+            <form role="form" name="order_form" novalidate id="order-form">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <table class="table">
@@ -320,12 +321,14 @@
                             <tbody>
                                 <tr ng-repeat="product in orderedProducts track by $index">
                                     <td class="vert-align">{{product.product_name}}</td>
-                                    <td class="vert-align">{{ product.price | currency:"$":0 }}</td>
+                                    <td class="vert-align">{{product.price | currency:"$":0 }}</td>
                                     <td class="text-center">
                                         <select class="form-control form-control-inline" ng-model="selectedOptions" ng-init="selectedOptions" ng-options="opt as opt.label for opt in options" ng-change="selected(selectedOptions,product)"></select>
                                     </td>
                                     <td id="price{{$index}}" class="text-right vert-align">{{ selectedOptions.value * product.price | currency:"$":0 }}</td>
-                                    <td> <button type="button" style="margin-right: 3%" class="close fa-4x" ng-click="deleteDataFromCart(product,selectedOptions)">&times;</button></td>
+                                    <td>
+                                        <button type="button" style="margin-right: 3%" class="close fa-4x" ng-click="deleteDataFromCart(product,selectedOptions)">&times;</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -336,13 +339,13 @@
                             <div class="col-sm-8 col-md-8">
                                 <div class="form-group">
                                     <label class="control-label">Name</label>
-                                    <input name="Card number" placeholder="Card number" class="form-control input-lg" type="text">
+                                    <input name="Card number" ng-model="order.cardNumber" placeholder="Card number" class="form-control input-lg" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-4 col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Code</label>
-                                    <input name="Code" placeholder="Code" class="form-control input-lg" type="text">
+                                    <input name="Code" placeholder="Code" ng-model="order.cardCode" class="form-control input-lg" type="text">
                                 </div>
                             </div>
                         </div>
@@ -351,7 +354,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="contact-mail">month</label>
                                     <div class=" controls">
-                                        <select class="form-control">
+                                        <select class="form-control" ng-model="order.cardMonth">
                                             <option>January</option>
                                             <option>February</option>
                                             <option>March</option>
@@ -363,7 +366,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="contact-mail">year</label>
                                     <div class=" controls">
-                                        <select class="form-control">
+                                        <select class="form-control" ng-model="order.cardYear">
                                             <option>2014</option>
                                             <option>2015</option>
                                             <option>2016</option>
@@ -379,45 +382,38 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Name</label>
-                                    <input name="First name" placeholder="First name" class="form-control input-lg" type="text">
+                                    <input name="First name" ng-model="order.firstName" placeholder="First name" class="form-control input-lg" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Last Name</label>
-                                    <input name="Last name" placeholder="Last name" class="form-control input-lg" type="text">
+                                    <input name="Last name" placeholder="Last name" ng-model="order.lastName" class="form-control input-lg" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Email</label>
-                            <input name="email" placeholder="Your email" class="form-control input-lg" type="email">
-                        </div>
-                        <p class="text-center"><strong>If you have Coupon code</strong></p>
-                        <div class="input-group ">
-                            <input placeholder="Coupon code" class="form-control input-lg" type="text">
-                            <span class="input-group-btn">
-                            <button name="submit" type="submit" class="btn btn-store">Check!</button>
-                        </span>
+                            <input name="email" placeholder="Your email" ng-model="order.email" class="form-control input-lg" type="email">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <p class="text-center"><strong>Delivery address</strong></p>
                         <div class="form-group">
                             <label class="control-label">Street</label>
-                            <input name="street" placeholder="Street address" class="form-control" type="text">
+                            <input name="street" ng-model="order.adress" placeholder="Street address" class="form-control" type="text">
                         </div>
                         <div class="form-group">
                             <label class="control-label">City</label>
-                            <input name="city" placeholder="City" class="form-control" type="text">
+                            <input name="city" placeholder="City" ng-model="order.city" class="form-control" type="text">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Country</label>
-                            <input name="Country" placeholder="Country" class="form-control" type="text">
+                            <input name="Country" placeholder="Country" ng-model="order.country" class="form-control" type="text">
                         </div>
                         <div class="form-group">
                             <label class="control-label">postcode</label>
-                            <input name="postcode" placeholder="Post code" class="form-control" type="text">
+                            <input name="postcode" placeholder="Post code" ng-model="order.postCode" class="form-control" type="text">
                         </div>
                         <table class="table">
                             <thead>
@@ -439,9 +435,8 @@
                             </tbody>
                         </table>
                         <p>
-                            <button name="submit" type="submit" class="btn btn-store btn-block">Order Product</button>
+                            <button type="button" ng-click="postOrder(order)" class="btn btn-store btn-block">Order Product</button>
                         </p>
-                        <input type="hidden" name="submitted" id="submitted" value="true">
                     </div>
                 </div>
             </form>
@@ -475,7 +470,7 @@
                 <h1><strong>Contact</strong></h1>
                 <p>Do you have some kind of problem with our products?</p>
             </header>
-            <form action="index.html" method="post" novalidate id="contact-form">
+            <form novalidate id="contact-form">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 contact-info cta-message wow fadeInLeft">
                         <address>
@@ -490,25 +485,24 @@
                         <div class="form-group">
                             <label class="control-label" for="contact-name">Name</label>
                             <div class="controls">
-                                <input id="contact-name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text">
+                                <input id="contact-name" ng-model="info.name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="contact-mail">Email</label>
                             <div class=" controls">
-                                <input id="contact-mail" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
+                                <input id="contact-mail" ng-model="info.email" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="contact-message">Message</label>
                             <div class="controls">
-                                <textarea id="contact-message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
+                                <textarea id="contact-message" ng-model="info.message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
                             </div>
                         </div>
                         <p>
-                            <button name="submit" type="submit" class="btn btn-store btn-block">Send Message</button>
+                            <button name="submit" ng-click="sentEmail(info)" class="btn btn-store btn-block">Send Message</button>
                         </p>
-                        <input type="hidden" name="submitted" id="submitted3" value="true">
                     </div>
                 </div>
             </form>
