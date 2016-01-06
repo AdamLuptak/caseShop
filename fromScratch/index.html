@@ -468,7 +468,7 @@
                 <h1><strong>Contact</strong></h1>
                 <p>Do you have some kind of problem with our products?</p>
             </header>
-            <form novalidate id="contact-form">
+            <form  id="contact-form"  name="formContact"novalidate>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 contact-info cta-message wow fadeInLeft">
                         <address>
@@ -480,22 +480,34 @@
                         </address>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-8 wow fadeInUp">
-                        <div class="form-group">
+                        <div class="form-group" >
                             <label class="control-label" for="contact-name">Name</label>
                             <div class="controls">
-                                <input id="contact-name" ng-model="info.name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text">
+                                <input id="contact-name" ng-model="info.name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text" ng-pattern="/(^[A-Z]{1})([a-z]{1,5})$/" required>
                             </div>
+                             <div class="error redError" ng-show="formContact.contactName.$dirty && formContact.contactName.$invalid">
+                                        <small class="error" ng-show="formContact.contactName.$error.pattern">Upper Case</small>
+                                        <small class="error" ng-show="formContact.contactName.$error.required">
+                                Your Lastname is required.
+                            </small>
+                                    </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="contact-mail">Email</label>
                             <div class=" controls">
-                                <input id="contact-mail" ng-model="info.email" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
+                                <input id="contact-mail" ng-model="info.email" name="email" placeholder="Your email" class="form-control input-lg" type="email" required ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                                <div class="error redError" ng-show="formContact.email.$dirty && formContact.email.$invalid">
+                                        <small class="error" ng-show="formContact.email.$error.pattern">Upper Case</small>
+                                        <small class="error" ng-show="formContact.email.$error.required">
+                                Your Email is required.
+                            </small>
+                                    </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="contact-message">Message</label>
                             <div class="controls">
-                                <textarea id="contact-message" ng-model="info.message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
+                                <textarea  maxlength="200" id="contact-message" ng-model="info.message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
                             </div>
                         </div>
                         <p>

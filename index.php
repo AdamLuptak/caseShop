@@ -102,7 +102,12 @@ $app->post("/stayInTouch", function () use($app, $db) {
   $order = $app->request();
   $orderObject = $order->getBody();
   $jsonFromPost = json_decode($orderObject);
-  echo $orderObject;
+ 
+  $order = R::dispense('stayintouch');
+  $order->email = $jsonFromPost->{'email'};
+  $orderId = $id = R::store($order);
+
+
 });
 
 /**
@@ -113,7 +118,12 @@ $app->post("/contact", function () use($app, $db) {
   $order = $app->request();
   $orderObject = $order->getBody();
   $jsonFromPost = json_decode($orderObject);
-  echo $orderObject;
+  $order = R::dispense('contact');
+  $order->email = $jsonFromPost->{'email'};
+  $order->name = $jsonFromPost->{'name'};
+  $order->message = $jsonFromPost->{'message'};
+  $orderId = $id = R::store($order);
+
 });
 
 
