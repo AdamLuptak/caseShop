@@ -24,13 +24,13 @@ $(document).ready(function() {
     });
 
     /* Navbar colapse ======================================= */
-    $(document).on('click.nav','.navbar-collapse.in',function(e) {
-        if( $(e.target).is('a') || $(e.target).is('button')) {
+    $(document).on('click.nav', '.navbar-collapse.in', function(e) {
+        if ($(e.target).is('a') || $(e.target).is('button')) {
             $(this).collapse('hide');
         }
     });
 
-    /* Smooth Hash Link Scroll ======================================= */   
+    /* Smooth Hash Link Scroll ======================================= */
     $('.smooth-scroll').click(function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             var target = $(this.hash);
@@ -38,7 +38,7 @@ $(document).ready(function() {
             if (target.length) {
                 // console.log(offset());
                 $('html,body').animate({
-                        scrollTop: target.offset().top - 60
+                    scrollTop: target.offset().top - 60
                 }, 1000);
                 return false;
             }
@@ -222,6 +222,21 @@ $(document).ready(function() {
         beforeStart: function() {},
         onComplete: function() {}
     });
+
+    /**
+     * Blinking arrow
+     */
+    setInterval(function() {
+        blink()
+    }, 500);
+
+
+    function blink() {
+        $("#blinking-arrow").fadeTo(100, 0.1).fadeTo(200, 1.0);
+    }
+
+
+
 
 });
 

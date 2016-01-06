@@ -28,7 +28,7 @@ function createOrder($jsonFromPost){
 	$order->email = $jsonFromPost->{'email'};
 	$order->firstName = $jsonFromPost->{'firstName'};
 	$order->lastName = $jsonFromPost->{'lastName'};
-	$order->streetAddress =  $jsonFromPost->{'streetAddress'};
+	$order->streetAddress =  $jsonFromPost->{'adress'};
 	$order->city =  $jsonFromPost->{'city'};
 	$order->country =  $jsonFromPost->{'country'};
 	$order->postCode =  $jsonFromPost->{'postCode'};
@@ -36,13 +36,14 @@ function createOrder($jsonFromPost){
 
 
 	$maxId = R::getRow('select MAX(id) from products');
-	$orders = $jsonFromPost->{'orders'};
-	
+	$orders = $jsonFromPost->{'products'};
+	echo "idem je: " . $orders[0]->{'id'};
+	//var_dump($orders);
     //one to many relation ship
 	if(isThereProduct($orders,$maxId["MAX(id)"])){
-		foreach ($orders as $key => $value) {
+		for ($i=0; $i < sizeof($orders) ; $i++){
 			$ordersProduct = R::dispense('orderproducts');
-			$ordersProduct->productNumber = $value;
+			$ordersProduct->productNumber = $orders[$i]->{'id'};
 			$ordersProduct->orderNumber = $orderId;
 			$id = R::store($ordersProduct);
 		}  
@@ -60,11 +61,13 @@ function deleteAllFromTable($tableName){
  * @return Boolean
  */
 function isThereProduct($array,$valueCheck){
-	foreach ($array as $key => $value) {
-		if($value > $valueCheck){
+	//echo "\n sdfs" . $array[0];
+   for ($i=0; $i < sizeof($array) ; $i++) { 
+     if(($array[$i]->{'id'}) > $valueCheck){
 			return false;
 		}
-	}
+   }
+
 	return true;
 }
 
@@ -79,11 +82,11 @@ function orderValidation($jsonFromPost){
 		$email = $jsonFromPost->{'email'};
 		$firstName = $jsonFromPost->{'firstName'};
 		$lastName = $jsonFromPost->{'lastName'};
-		$streetAddress =  $jsonFromPost->{'streetAddress'};
+		$streetAddress =  $jsonFromPost->{'adress'};
 		$city =  $jsonFromPost->{'city'};
 		$country =  $jsonFromPost->{'country'};
 		$postCode =  $jsonFromPost->{'postCode'};
-		$orders = $jsonFromPost->{'orders'};
+		$orders = $jsonFromPost->{'products'};
 	}catch(Exception $e) {
 		echo 'Message: ' .$e->getMessage();
 		return false;
@@ -93,15 +96,15 @@ function orderValidation($jsonFromPost){
 		return false; 
 	}
 
-	//firstName only charcaters first uppercase, len < 15
+	// //firstName only charcaters first uppercase, len < 15
 	if (!preg_match("/(^[A-Z]{1})([a-z]{1,15})/",$firstName) || strlen($firstName ) > 15) {
 		return false;
 	}
-	//lastName only charcaters first uppercase, len < 15
+	// //lastName only charcaters first uppercase, len < 15
 	if (!preg_match("/(^[A-Z]{1})([a-z]{1,15})/",$lastName) || strlen($lastName) > 15) {
 		return false; 
 	}
-	//streetAdress only charcaters first uppercase and number, len < 50
+	// //streetAdress only charcaters first uppercase and number, len < 50
 	if (!preg_match("/(^[A-Z]{1})([a-z]{1,50})/",$streetAddress) || strlen($streetAddress) > 15) {
 		return false; 
 	}
@@ -122,9 +125,9 @@ function orderValidation($jsonFromPost){
 		return false;       
 	}else{
 		for ($x = 0; $x < sizeof($orders); $x++) {
-			if (!preg_match("/[0-9]{1,10}/", $orders[$x])) {
-				return false; 
-			}
+			// if (!preg_match("/[0-9]{1,10}/", $orders[$x])) {
+			// 	return false; 
+			// }
 		}
 	}
     //if everything is correct return true

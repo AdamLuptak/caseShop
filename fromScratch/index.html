@@ -76,7 +76,7 @@
                         <li><a href="#link"><i class="fa fa-envelope-o"></i></a></li>
                         <li><a href="#link"><i class="fa fa-mobile"></i></a></li>
                     </ul>
-                    <a class="btn btn-store smooth-scroll" ng-click="toProducts()" href="#products">browse the goods</a>         
+                    <a class="btn btn-store smooth-scroll" ng-click="toProducts()" href="#products">browse the goods</a>
                 </div>
             </div>
         </div>
@@ -186,10 +186,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 wow fadeInLeft">
-                    <h3 id="label-shop" class="center cta-message">Best products <strong>CLICK ON SEE ALL PRODUCTS</strong> <span style="margin-left: 25%">  <img src="img/arrow black.gif" width=100 ></span> </h3>
+                    <h3 id="label-shop" class="center cta-message">Best products <strong>CLICK ON SEE ALL PRODUCTS</strong> <span style="margin-left: 25%">  <img id ="blinking-arrow"src="img/arrow black.gif" width=100 ></span> </h3>
                     <h3 id="label-shop2" style="display:none" class="center cta-message">Case shop Ware-house <strong><span>Buy what you need</span></strong></h3>
                 </div>
-              
                 <div class="col-md-4 text-center wow fadeInRight">
                     <a class="btn btn-store outline" id="show-btn" style="margin-top: 10%;" href="#product-slide">See all products</a>
                 </div>
@@ -334,86 +333,85 @@
                         </table>
                     </div>
                     <div class="col-sm-6 col-md-6 contact-info">
-                        <p class="text-center"><strong>Payment Method</strong></p>
-                        <div class="row">
-                            <div class="col-sm-8 col-md-8">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                    <input name="Card number" ng-model="order.cardNumber" placeholder="Card number" class="form-control input-lg" type="text">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Code</label>
-                                    <input name="Code" placeholder="Code" ng-model="order.cardCode" class="form-control input-lg" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="contact-mail">month</label>
-                                    <div class=" controls">
-                                        <select class="form-control" ng-model="order.cardMonth">
-                                            <option>January</option>
-                                            <option>February</option>
-                                            <option>March</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="contact-mail">year</label>
-                                    <div class=" controls">
-                                        <select class="form-control" ng-model="order.cardYear">
-                                            <option>2014</option>
-                                            <option>2015</option>
-                                            <option>2016</option>
-                                            <option>2017</option>
-                                            <option>2018</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <p class="text-center"><strong>Information</strong></p>
                         <div class="row">
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Name</label>
-                                    <input name="First name" ng-model="order.firstName" placeholder="First name" class="form-control input-lg" type="text">
+                                    <input type="text" class="form-control input-lg" name="First_name" ng-model="order.firstName" placeholder="First name" ng-pattern="/(^[A-Z]{1})([a-z]{1,5})$/" required>
+                                    <div class="error redError" ng-show="order_form.First_name.$dirty && order_form.First_name.$invalid">
+                                        <small class="error" ng-show="order_form.First_name.$error.pattern">Upper Case</small>
+                                        <small class="error" ng-show="order_form.First_name.$error.required">
+                                Your firstname is required.
+                            </small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Last Name</label>
-                                    <input name="Last name" placeholder="Last name" ng-model="order.lastName" class="form-control input-lg" type="text">
+                                    <input name="Last_name" placeholder="Last name" ng-model="order.lastName" class="form-control input-lg" type="text" ng-pattern="/(^[A-Z]{1})([a-z]{1,5})$/" required>
+                                    <div class="error redError" ng-show="order_form.Last_name.$dirty && order_form.Last_name.$invalid">
+                                        <small class="error" ng-show="order_form.Last_name.$error.pattern">Upper Case</small>
+                                        <small class="error" ng-show="order_form.Last_name.$error.required">
+                                Your Lastname is required.
+                            </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Email</label>
-                            <input name="email" placeholder="Your email" ng-model="order.email" class="form-control input-lg" type="email">
+                            <input name="email" placeholder="Your email" ng-model="order.email" class="form-control input-lg" ng-model="text" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" type="email" autofocus required>
+                            <div class="error redError" ng-show="order_form.email.$dirty && order_form.email.$invalid">
+                                <small class="error" ng-show="order_form.email.$error.pattern">No valid email ("name@sevice.sk")</small>
+                                <small class="error" ng-show="order_form.email.$error.required">
+                                Your Email is required.
+                            </small>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <p class="text-center"><strong>Delivery address</strong></p>
                         <div class="form-group">
                             <label class="control-label">Street</label>
-                            <input name="street" ng-model="order.adress" placeholder="Street address" class="form-control" type="text">
+                            <input name="street" ng-model="order.adress" placeholder="Street address" class="form-control" type="text" ng-pattern="/(^[A-Z]{1})([a-z]{1,50})$/" require>
+                            <div class="error redError" ng-show="order_form.street.$dirty && order_form.street.$invalid">
+                                <small class="error" ng-show="order_form.street.$error.pattern">To many characters</small>
+                                <small class="error" ng-show="order_form.street.$error.required">
+                                Your Street name is required.
+                            </small>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">City</label>
-                            <input name="city" placeholder="City" ng-model="order.city" class="form-control" type="text">
+                            <input name="city" placeholder="City" ng-model="order.city" class="form-control" type="text" ng-pattern="/(^[A-Z]{1})([a-z]{1,50})$/" required>
+                            <div class="error redError" ng-show="order_form.city.$dirty && order_form.city.$invalid">
+                                <small class="error" ng-show="order_form.city.$error.pattern">To many characters</small>
+                                <small class="error" ng-show="order_form.city.$error.required">
+                                Your City name is required.
+                            </small>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Country</label>
-                            <input name="Country" placeholder="Country" ng-model="order.country" class="form-control" type="text">
+                            <input name="Country" placeholder="Country" ng-model="order.country" class="form-control" type="text" ng-pattern="/(^[A-Z]{1})([a-z]{1,20})/" required>
+                            <div class="error redError" ng-show="order_form.Country.$dirty && order_form.Country.$invalid">
+                                <small class="error" ng-show="order_form.Country.$error.pattern">To many characters</small>
+                                <small class="error" ng-show="order_form.Country.$error.required">
+                                Your Country name is required.
+                            </small>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">postcode</label>
-                            <input name="postcode" placeholder="Post code" ng-model="order.postCode" class="form-control" type="text">
+                            <input name="postcode" placeholder="Post code" ng-model="order.postCode" class="form-control" type="text" ng-pattern="/^\d{1,9}$/" required>
+                            <div class="error redError" ng-show="order_form.postcode.$dirty && order_form.postcode.$invalid">
+                                <small class="error" ng-show="order_form.postcode.$error.pattern">Only numbers or to many numbers</small>
+                                <small class="error" ng-show="order_form.postcode.$error.required">
+                                Your PostCode name is required.
+                            </small>
+                            </div>
                         </div>
                         <table class="table">
                             <thead>
@@ -516,9 +514,7 @@
                 <br> Designed by <a href="http://www.angelostudio.net" target="_blank">Angelo Studio</a>.
                 <br>
             </p>
-            <div class="pull-right paymentMethodImg copyright wow fadeInRight">
-                <a class="btn btn-store outline" href="#" data-toggle="modal" data-target=".text-modal">Terms & conditions</a>
-            </div>
+        </div>
         </div>
     </footer>
     <!-- end of footer -->
@@ -537,6 +533,8 @@
     <script type="text/javascript" src="js/jquery.countdown.min.js"></script>
     <!-- singlePageNav -->
     <script type="text/javascript" src="js/jquery.singlePageNav.min.js"></script>
+    <!-- Jquery UI -->
+    <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
     <!-- Scripts -->
     <!-- custom Js -->
     <script type="text/javascript" src="js/custom.js"></script>
