@@ -81,13 +81,12 @@ $app->post("/order", function () use($app, $db) {
   $order = $app->request();
   $orderObject = $order->getBody();
   $jsonFromPost = json_decode($orderObject);
-  echo  $orderObject;
   if(orderValidation($jsonFromPost) != 1){
     //wrong input sent error response
-    echo "zle daco ";
+    echo " failed";
   }
   else{
-    echo "je to ok";
+    echo "ok";
     //validation OK sent succes response 
     createOrder($jsonFromPost);
   }

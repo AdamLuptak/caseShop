@@ -13,14 +13,13 @@
      */
      this.cart = new Array();
      this.cartInstace = {};
+
     /**
      * add item to cart
      * @param item 
      */
      this.addProduct = function(product){
-
      	this.cart.push(product);
-
      }
 
     /**
@@ -44,6 +43,5 @@
       this.allProducts = function(){
       	return this.cart;
       }
-
 
   }]);

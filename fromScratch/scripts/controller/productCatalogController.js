@@ -146,7 +146,17 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
                 'Content-Type': 'application/json'
             }
         }).success(function(data, status, headers, config) {
-            console.log(data);
+            if(data.search("failed") > -1){
+                alert("You not fullfill the order form corectly ORDER IS NOT PROCED");
+            }else{
+                alert("Your order is in progress we will contact you by email thank you");
+                //reinitialized the cart 
+                cartService.initCart();
+                $scope.orderedProducts = cartService.allProducts();
+                $scope.productOrderNumber = 0;
+                angular.element("#shopingCartIcon").css('color', '#FFF')
+            }
+
         }).error(function(data, status, headers, config) {
             $scope.status = status + ' ' + headers;
         });

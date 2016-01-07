@@ -147,6 +147,11 @@ $(document).ready(function() {
     });
     $('#show-btn').toggleText("See all products", "Hide all products");
 
+    /*Show read mi text*/
+    $('#show-btn2').click(function() {
+        $('#showme2').slideToggle();
+    });
+
     /* One Page Navigation Setup ======================================= */
     $('#main-nav').singlePageNav({
         offset: $('.navbar').height(),
