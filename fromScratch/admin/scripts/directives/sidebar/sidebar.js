@@ -19,7 +19,7 @@ angular.module('sbAdminApp')
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
-        
+        console.log($scope);
         $scope.check = function(x){
           
           if(x==$scope.collapseVar)

@@ -1,0 +1,17 @@
+<div>
+    <div class="modal fade" id="loginModal" tabindex="-1" + role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()"> x </button>
+                    <h3>{{label}}</h3 > 
+                  </div>
+                <div class="modal-body">
+                   <input name="Last_name" placeholder="Category name" ng-model="categoryName.name" class="form-control input-lg" type="text"> 
+                   <div class="row"> 
+                   <div style="margin-top: 10px" class="col-md-12 text-right"> <button type="button" ng-click="addNewCategoryName(categoryName)" class="btn btn-success">add {{name}}</button></div>    </div>
+                 </div>
+               </div > 
+            </div > 
+          </div>
+        </div >

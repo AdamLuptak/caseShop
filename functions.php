@@ -62,11 +62,11 @@ function deleteAllFromTable($tableName){
  */
 function isThereProduct($array,$valueCheck){
 	//echo "\n sdfs" . $array[0];
-   for ($i=0; $i < sizeof($array) ; $i++) { 
-     if(($array[$i]->{'id'}) > $valueCheck){
+	for ($i=0; $i < sizeof($array) ; $i++) { 
+		if(($array[$i]->{'id'}) > $valueCheck){
 			return false;
 		}
-   }
+	}
 
 	return true;
 }
@@ -133,5 +133,42 @@ function orderValidation($jsonFromPost){
     //if everything is correct return true
 	return true; 
 }
+
+function updateProduct($jsonFromPost){
+	//read find with Id
+}
+
+function deleteProduct($jsonFromPost){
+	//read find with Id
+}
+
+/**
+ * Insert new category
+ * @param newCategoryName
+ */
+function addCategory($newCategory){
+	$category = R::dispense("category");
+	$category->category = $newCategory->{'name'};
+	$id = R::store($category);
+}
+
+/**
+ * Delte category
+ * @param deleteCategory
+ */
+function deleteCategory($DeleteCategory){
+	for ($i=0; $i <sizeof($DeleteCategory); $i++) { 
+		
+		$category = R::load( 'category', $DeleteCategory[$i]->{'id'} );
+        if($category->id == $DeleteCategory[$i]->{'id'} ){
+        	echo "fas rovnake su";
+        	  R::trash( $category );
+        }
+
+	}
+   
+}
+
+
 
 ?>

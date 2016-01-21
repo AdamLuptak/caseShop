@@ -1255,3 +1255,7 @@ import url('//netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-comb
 .pagination>li>span {
     color: #808080;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

@@ -277,7 +277,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
         product.quantity = event.value;
         $scope.totalSumCost += parseInt(event.value) * parseInt(product.price);
         $scope.totalSumCost -= parseInt(product.price);
-    }
+    };
     $scope.totalPrice = 200;
 
     $scope.selectedOptions = $scope.options[1];
