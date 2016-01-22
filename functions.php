@@ -169,6 +169,18 @@ function deleteCategory($DeleteCategory){
    
 }
 
+/**
+ * update name of category find by ID
+ * @param obejct with old name and category id which you wanna update
+ */
+function  updateCategory($ItemForUpdate){
+    $ItemForUpdate->{"oldId"};
+    //fin in database category with Id
+    $category = R::load( 'category', $ItemForUpdate->{"oldId"} );
+    $category->category =  $ItemForUpdate->{"newName"};
+    $id = R::store($category);
+}
+
 
 
 ?>

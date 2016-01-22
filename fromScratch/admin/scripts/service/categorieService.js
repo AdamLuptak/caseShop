@@ -4,8 +4,6 @@ angular
             async: function() {
                 // $http returns a promise, which has a then function, which also returns a promise
                 var promise = $http.get('http://localhost/caseShop/index.php/categories').then(function(response) {
-                    // The then function here is an opportunity to modify the response
-                    console.log(response);
                     // The return value gets picked up by the then in the controller.
                     return response.data;
                 });
@@ -27,10 +25,7 @@ angular
                         data.forEach(function(element, index) {
                             element.check = false;
                         });
-
-                        console.log(data);
                     });
-                console.log(data);
                 }).error(function(data, status, headers, config) {
                     $scope.status = status + ' ' + headers;
                 });

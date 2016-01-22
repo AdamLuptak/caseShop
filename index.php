@@ -49,6 +49,9 @@ $app->get('/products', function () use ($app) {
   echo json_encode(R::exportAll($products));
 });
 
+
+
+
 /**
  * get item from database by name
  * @param  $name  product name*
@@ -120,6 +123,20 @@ $app->post("/deleteCategory", function () use($app, $db) {
 });
 
 /**
+ * update category
+ **/
+$app->post("/updateCategory", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $category = $app->request();
+  $updateObject = $category->getBody();
+  $jsonFromPost = json_decode($updateObject);
+  echo "servet" .  $updateObject;
+  updateCategory($jsonFromPost);
+});
+
+
+
+/**
  * Delete product update product
  **/
 $app->post("/deleteProduct", function () use($app, $db) {
@@ -130,11 +147,6 @@ $app->post("/deleteProduct", function () use($app, $db) {
   deleteProduct($updateObject);
 
 });
-
-// run
-
-//post order
-//$app->post('/order', 'addOrder' use ($app));
 
 /**
  * comsume post request and check if data is valid than

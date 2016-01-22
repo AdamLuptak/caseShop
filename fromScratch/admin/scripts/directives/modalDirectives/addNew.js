@@ -19,8 +19,16 @@ angular.module('sbAdminApp').directive('igLogin', function(categoryService) {
 
             $scope.addNewCategoryName = function(newCategoryName) {
                 console.log(newCategoryName);
-                categoryService.postHelper('http://localhost/caseShop/index.php/addCategory', newCategoryName,$scope);
+                categoryService.postHelper($scope.ADDNEW, newCategoryName,$scope);
                 $("#loginModal").modal('hide');
+                $scope.categoryName.name = "";
+            };
+
+             $scope.editCategory = function(newCategoryName) {
+                $scope.editCategoryItem.newName = newCategoryName.name;
+                categoryService.postHelper($scope.UPDATE,  $scope.editCategoryItem,$scope);
+                $("#loginModal").modal('hide');
+                $scope.categoryName.name = "";
             };
 
             $scope.$watch('loggingIn', function() {

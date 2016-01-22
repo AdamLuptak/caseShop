@@ -2,6 +2,18 @@ angular.module('sbAdminApp').controller('CategoriesController', ['$scope', 'cate
 
     $scope.label = "Add new Category";
     $scope.name = "category";
+    $scope.editCategoryItem = {};
+    $scope.loggingIn = false;
+    $scope.editShow = false;
+    $scope.addNewShow = false;
+    $scope.mainLabel = "Categories";
+    $scope.plusItem = "+ Categorie";
+    $scope.minusItem = "- Delete";
+    $scope.labelForTable= "Category Name";
+    $scope.UPDATE = "http://localhost/caseShop/index.php/updateCategory";
+    $scope.DELETE = "http://localhost/caseShop/index.php/deleteCategory";
+    $scope.ADDNEW = "http://localhost/caseShop/index.php/addCategory";
+
 
     /**
      * Delete selected items from DB!
@@ -9,7 +21,7 @@ angular.module('sbAdminApp').controller('CategoriesController', ['$scope', 'cate
      * @param String category naem of seletec category
      */
     $scope.checkBoxHandle = function(master, category) {
-        console.log(master);
+
     };
 
     /**
@@ -31,8 +43,6 @@ angular.module('sbAdminApp').controller('CategoriesController', ['$scope', 'cate
         data.forEach(function(element, index) {
             element.check = false;
         });
-
-        console.log(data);
     });
 
     /**
@@ -49,28 +59,47 @@ angular.module('sbAdminApp').controller('CategoriesController', ['$scope', 'cate
         });
     };
 
+    /**
+     * Add new category do DB
+     */
     $scope.addNewCategory = function() {
+        $scope.categoryName.name = "";
+        $scope.name = "Add category";
+        $scope.label = "Add new Category";
+        $scope.addNewShow = true;
+        $scope.editShow = false;
         $scope.loggingIn = true;
         $("#loginModal").modal('show');
     };
 
+    /**
+     * Delte selected categories do DB
+     */
     $scope.deleteCategories = function() {
         deleteItems = [];
-       $scope.categoriesData.forEach(function(element, index) {
-           
-           if(element.check){
-        
-           deleteItems.push(element);
-           }
+        $scope.categoriesData.forEach(function(element, index) {
+
+            if (element.check) {
+
+                deleteItems.push(element);
+                element.check = false;
+            }
         });
-                 console.log(deleteItems);
-       categoryService.postHelper('http://localhost/caseShop/index.php/deleteCategory', deleteItems,$scope);
-   
+        $scope.checkAllContact1 = false;
+        categoryService.postHelper($scope.DELETE, deleteItems, $scope);
+
     };
+
+    /**
+     * Edit category
+     */
     $scope.edit = function(category) {
-
+        $scope.editCategoryItem.oldId = category.id;
+        $scope.label = "Edit Category";
+        $scope.name = "Edit category";
+        $scope.addNewShow = false;
+        $scope.editShow = true;
+        $scope.loggingIn = true;
+        $("#loginModal").modal('show');
     };
-
-    $scope.loggingIn = false;
-
 }]);

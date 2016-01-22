@@ -149,7 +149,18 @@ angular
             })
             .state('dashboard.products', {
                 templateUrl: 'views/ui-elements/products.html',
-                url: '/products'
+                url: '/products',
+                controller: 'ProductController',
+                 resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: ['scripts/controllers/productController.js',
+                                'scripts/service/categorieService.js',
+                                'scripts/directives/modalDirectives/addNew.js']
+                            });
+                    }
+                }
             })
             .state('dashboard.notifications', {
                 templateUrl: 'views/ui-elements/notifications.html',

@@ -7,9 +7,14 @@
                     <h3>{{label}}</h3 > 
                   </div>
                 <div class="modal-body">
-                   <input name="Last_name" placeholder="Category name" ng-model="categoryName.name" class="form-control input-lg" type="text"> 
+                   <input  ng-show="addNewShow" ng-keyup="$event.keyCode == 13 && addNewCategoryName(categoryName)"  placeholder="Category name" ng-model="categoryName.name" class="form-control input-lg" type="text"> 
+                   <div></div>
+                    <input ng-show="editShow" ng-keyup="$event.keyCode == 13 && addNewCategoryName(categoryName)" name="Last_name" placeholder="Category name change" ng-model="categoryName.name" class="form-control input-lg" type="text"> 
+
                    <div class="row"> 
-                   <div style="margin-top: 10px" class="col-md-12 text-right"> <button type="button" ng-click="addNewCategoryName(categoryName)" class="btn btn-success">add {{name}}</button></div>    </div>
+                   <div style="margin-top: 10px" ng class="col-md-12 text-right"> <button ng-show="addNewShow" type="button" ng-click="addNewCategoryName(categoryName)" class="btn btn-success"> {{name}}</button>
+                    <button type="button" ng-show="editShow" ng-click="editCategory(categoryName)" class="btn btn-success"> {{name}}</button></div> 
+                      </div>
                  </div>
                </div > 
             </div > 
