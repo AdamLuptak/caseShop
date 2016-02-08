@@ -134,14 +134,6 @@ function orderValidation($jsonFromPost){
 	return true; 
 }
 
-function updateProduct($jsonFromPost){
-	//read find with Id
-}
-
-function deleteProduct($jsonFromPost){
-	//read find with Id
-}
-
 /**
  * Insert new category
  * @param newCategoryName
@@ -179,6 +171,32 @@ function  updateCategory($ItemForUpdate){
     $category = R::load( 'category', $ItemForUpdate->{"oldId"} );
     $category->category =  $ItemForUpdate->{"newName"};
     $id = R::store($category);
+}
+
+/**
+ * Insert new Product
+ * @param newProduct
+ */
+function addProduct($newProduct){
+	echo "addCategory";
+	/* prodcutName, description, price, category*/
+}
+
+/**
+ * Delte category
+ * @param deleteProduct
+ */
+function deleteProduct($DeleteProduct){
+	echo "delete product";
+   
+}
+
+/**
+ * update product
+ * @param obejct for update
+ */
+function  updateProduct($ItemForUpdate){
+   echo "update Product";
 }
 
 

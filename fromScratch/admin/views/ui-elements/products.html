@@ -14,8 +14,8 @@
                         <input class="form-control" ng-model="search"> </div>
                     <div class="col-md-3 text-left"></div>
                     <div class="col-md-6 text-right">
-                        <button type="button" ng-click="addNewCategory()" class="btn btn-success">{{plusItem}}</button>
-                        <button type="button" ng-click="deleteCategories()" class="btn btn-danger">{{minusItem}}</button>
+                        <button type="button" ng-click="addNewProduct()" class="btn btn-success">{{plusItem}}</button>
+                        <button type="button" ng-click="deleteProducts()" class="btn btn-danger">{{minusItem}}</button>
                     </div>
                 </div>
             </div>
@@ -32,22 +32,36 @@
                                         </label>
                                     </div>
                                 </th>
-                                <th><div style="margin-top: -2.5%">{{labelForTable}}</div> </th>
+                                <th>
+                                    <div style="margin-top: -2.5%">{{labelForTable}}</div>
+                                </th>
+                                <th>
+                                    <div style="margin-top: -2.5%">Categorie</div>
+                                </th>
+                                <th>
+                                    <div style="margin-top: -2.5%">Price</div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="category-table" class="odd gradeX" ng-repeat="category in  categoriesData | limitTo:limit | filter:search">
+                            <tr id="category-table" class="odd gradeX" ng-repeat="product in  productsData | limitTo:limit | filter:search">
                                 <td class="text-center">
                                     <div style="margin-top: 3%;">
                                         <label>
-                                            <input ng-model="category.check" class="box" ng-checked="checkBoxHandle(category.check, category)" type="checkbox" value="">
+                                            <input ng-model="product.check" class="box" ng-checked="checkBoxHandle(product.check, product)" type="checkbox" value="">
                                         </label>
                                     </div>
                                 </td>
                                 <td>
-                                    <div>{{category.category}}</div>
-                                    <div style="display=inline-block; margin-top: -3%;" class="text-right">
-                                        <button type="button" ng-click="edit(category)" class="btn btn-warning">Edit</button>
+                                    <div>{{product.product_name}}</div>
+                                </td>
+                                <td>
+                                    <div>{{product.categorie}} </div>
+                                </td>
+                                <td>
+                                    <div>{{product.price}}</div>
+                                    <div style="display=inline-block; margin-top: -10%;" class="text-right">
+                                        <button type="button" ng-click="edit(product)" class="btn btn-warning">Edit</button>
                                     </div>
                                 </td>
                             </tr>

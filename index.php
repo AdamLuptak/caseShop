@@ -26,7 +26,7 @@ R::setup('mysql:host=localhost;dbname=caseShop',
 //     } //iterate
 // //remove all
 $shop = R::load( 'shop', 2 );
- R::trash( $shop );
+R::trash( $shop );
 //     $shop->xownProductList = array();
 //     R::store( $shop );
  //    // R::store( $shop );
@@ -50,8 +50,6 @@ $app->get('/products', function () use ($app) {
 });
 
 
-
-
 /**
  * get item from database by name
  * @param  $name  product name*
@@ -70,6 +68,37 @@ $app->get('/products/:name', function ($name) use ($app) {
     }
   }else{
   }
+});
+
+/**
+ * CreateProduct
+ */
+$app->post("/createProduct", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $update = $app->request();
+  $updateObject = $update ->getBody();
+  addProduct($updateObject);
+});
+
+/**
+ * Update product
+ */
+$app->post("/updateProduct", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $update = $app->request();
+  $updateObject = $update->getBody();
+  updateProduct($updateObject);
+
+});
+
+/**
+ * Delete product
+ */
+$app->post("/deleteProduct", function () use($app, $db) {
+  $app->response()->header("Content-Type", "application/json");
+  $update = $app->request();
+  $updateObject = $update->getBody();
+  deleteProduct($updateObject);
 });
 
 /**
@@ -95,7 +124,6 @@ $app->post("/updateProduct", function () use($app, $db) {
   updateProduct($updateObject);
 
 });
-
 
 /**
  * add new category
@@ -136,17 +164,7 @@ $app->post("/updateCategory", function () use($app, $db) {
 
 
 
-/**
- * Delete product update product
- **/
-$app->post("/deleteProduct", function () use($app, $db) {
-  $app->response()->header("Content-Type", "application/json");
-  $update = $app->request();
-  $updateObject = $order->getBody();
-  echo "idem " . $update;
-  deleteProduct($updateObject);
 
-});
 
 /**
  * comsume post request and check if data is valid than

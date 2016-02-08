@@ -4,11 +4,6 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
     /**
      * Constant for http requests
      */
-
-    $scope
-
-
-
     $scope.pricee = 500;
 
     $scope.productOrderNumber = 0;
@@ -31,7 +26,7 @@ app.controller('ProductCatalogController', ['$scope', 'allProductsService', '$ht
                 return datas[data];
             }
         }
-    }
+    };
 
     /**
      * calculate how many page I need for pagin products

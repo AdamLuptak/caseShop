@@ -1,4 +1,4 @@
-angular.module('sbAdminApp').controller('ProductController', ['$scope', 'categoryService', '$http', function($scope, categoryService, $http) {
+angular.module('sbAdminApp').controller('ProductController', ['$scope', 'productsService', '$http', function($scope, productsService, $http) {
 
     $scope.label = "Add new product";
     $scope.name = "product";
@@ -13,7 +13,8 @@ angular.module('sbAdminApp').controller('ProductController', ['$scope', 'categor
     $scope.UPDATE = "http://localhost/caseShop/index.php/updateCategory";
     $scope.DELETE = "http://localhost/caseShop/index.php/deleteCategory";
     $scope.ADDNEW = "http://localhost/caseShop/index.php/addCategory";
-
+    $scope.GETPRODUCTS = "http://localhost/caseShop/index.php/products";
+    $scope.limit = 10;
 
     // /**
     //  * Delete selected items from DB!
@@ -34,16 +35,17 @@ angular.module('sbAdminApp').controller('ProductController', ['$scope', 'categor
     //     $scope.limit = (all) ? $scope.categoriesData.length : 10;
     // };
 
-    // /**
-    //  * Load data from category service
-    //  */
-    // categoryService.async().then(function(d) {
-    //     var data = d;
-    //     $scope.categoriesData = data;
-    //     data.forEach(function(element, index) {
-    //         element.check = false;
-    //     });
-    // });
+    /**
+     * Load data from product service
+     */
+     productsService.async().then(function(d) {
+        var data = d;
+        $scope.productsData = data;
+        data.forEach(function(element, index) {
+            element.check = false;
+        });
+        console.log(data)
+    });
 
     // /**
     //  * select all caegories for deleting
@@ -103,3 +105,41 @@ angular.module('sbAdminApp').controller('ProductController', ['$scope', 'categor
     //     $("#loginModal").modal('show');
     // };
 }]);
+
+
+angular
+.module('sbAdminApp').factory('productsService', ['$http', function($http) {
+    var myService = {
+        async: function() {
+                // $http returns a promise, which has a then function, which also returns a promise
+                var promise = $http.get("http://localhost/caseShop/index.php/products").then(function(response) {
+                    // The return value gets picked up by the then in the controller.
+                    return response.data;
+                });
+                // Return the promise to the controller
+                return promise;
+            },
+            postHelper: function(url, data, $scope) {
+                $http({
+                    url: url,
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).success(function(data, status, headers, config) {
+                    myService.async().then(function(d) {
+                        var data = d;
+                        $scope.categoriesData = data;
+                        data.forEach(function(element, index) {
+                            element.check = false;
+                        });
+                    });
+                }).error(function(data, status, headers, config) {
+                    $scope.status = status + ' ' + headers;
+                });
+            }
+        };
+        return myService;
+
+    }]);
